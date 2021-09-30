@@ -22,6 +22,4 @@
 ## Planned:
 - [x] **Sort files without extension**
 - [x] **Delete empty folders**
-- [ ] **Sorting folders**
 - [ ] **Sort files from folders (optional)**
-- [ ] **Choosing a sorting path**
