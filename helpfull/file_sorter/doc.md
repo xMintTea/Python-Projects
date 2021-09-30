@@ -1,0 +1,25 @@
+# File sorter 1.1v
+
+## How it works?
+1. A "sort" folder is created on your desktop
+2. The script exits if the folder is empty. You must fill the folder with files and run the script again
+3. Folders with the name of the file extension are created and the necessary files are moved to the folder that corresponds to their extension
+
+## Change log 
+
+### **1.1v:**
+
+
+- Bug fix:
+    * a bug with the creation of folders with the name of the extension has been fixed. If the file had more than one dot in the name, then the folder had a strange name
+
+- modified code
+
+### **1.2v:**
+- Now empty folders will be deleted
+- Files that do not have any extension will also be sorted
+
+## Planned:
+- [x] **Sort files without extension**
+- [x] **Delete empty folders**
+- [ ] **Sort files from folders (optional)**
