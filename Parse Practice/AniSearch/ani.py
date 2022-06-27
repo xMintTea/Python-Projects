@@ -1,6 +1,8 @@
-from base64 import decode
-import requests, eel, json
-import ctypes
+import requests, eel
+import ctypes, subprocess
+
+subprocess.SW_HIDE
+
 user32 = ctypes.windll.user32
 screensize = user32.GetSystemMetrics(0)+100, user32.GetSystemMetrics(1)+100
 
