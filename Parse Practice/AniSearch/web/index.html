@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="eel.js"></script>
+    <script src="https://kit.fontawesome.com/9dbb77cdf8.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <title>AniSearch</title>
+</head>
+<body>
+
+    <div class="blinder"></div>
+
+    <div class="nav">
+        <nav>AniSearch</nav>
+    </div>
+    <div class="search-box">
+        <input class="search" id="search" type="search-text" name="" placeholder="Поиск аниме">
+        <button class="search-btn" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+    </div>
+
+    <div id="awating", class="container"></div>
+    <div class="info_box" id="info">
+        
+
+    </div>
+
+
+
+    <script>
+        let search_btn = document.querySelector("#search-btn");
+        search_btn.onclick = function() {
+            let deleteElement = document.querySelector("#awating");
+            deleteElement.innerHTML = '';
+            let anotherDeleteElement = document.querySelector("#info");
+            anotherDeleteElement.innerHTML= ''
+            getdata();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.code == 'Enter') {
+                let deleteElement = document.querySelector("#awating");
+                deleteElement.innerHTML = '';
+                let anotherDeleteElement = document.querySelector("#info");
+                anotherDeleteElement.innerHTML= '';
+                getdata();
+            }
+        });
+
+        
+
+    </script>
+    <script>
+        async function getdata() {
+            let text = document.querySelector("#search").value;
+            document.querySelector("#search").value = "";
+
+            let result = await eel.getTitle(text)();
+            
+            for(let i = 0; i < result.length; i++){
+                let poster = result[i][3];
+
+                let awating = document.querySelector("#awating");
+
+
+
+                let img = document.createElement("img");
+                img.setAttribute("src",poster);
+                img.setAttribute("draggable","false");
+                img.setAttribute("id",i)
+                img.setAttribute("class","img")
+                awating.append(img)
+            }
+            
+            let elementsArray = document.querySelectorAll(".img");
+
+            elementsArray.forEach(function(elem) {
+                elem.addEventListener("click", function() {
+                    generateInfo(elem.id)
+            });
+        });
+
+        function generateInfo(id){
+            let name = result[id][0];
+            let description = result[id][1];
+            let status = result[id][2];
+            let str = result[id][4];
+
+            document.querySelector("#awating").innerHTML = "";
+
+            let info_div = document.querySelector("#info");
+
+            let info_poster = document.createElement("img");
+            info_poster.setAttribute("class","info_poster");
+            info_poster.setAttribute("src",result[id][3])
+
+            let info_name = document.createElement("p",name);
+            info_name.setAttribute("class","title_name");
+            info_name.innerHTML = name; 
+
+            let info_desc = document.createElement("p",description);
+            info_desc.setAttribute("class","desc");
+            info_desc.innerHTML = description
+            
+            let info_str = document.createElement("p",str);
+            info_str.setAttribute("class","info_str");
+            info_str.innerHTML = str;
+
+            let info_status = document.createElement("p", status);
+            info_status.setAttribute("class","status");
+            info_status.innerHTML = '('+status+')'
+
+            
+
+
+            info_div.append(info_poster,info_name,info_desc, info_str, info_status);
+
+        }
+            
+            
+        }
+
+        
+    </script>
+</body>
+</html>
