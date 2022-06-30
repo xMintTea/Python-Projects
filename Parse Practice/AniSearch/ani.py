@@ -1,10 +1,14 @@
 import requests, eel
 import ctypes, subprocess
 
+
 subprocess.SW_HIDE
 
 user32 = ctypes.windll.user32
-screensize = user32.GetSystemMetrics(0)+100, user32.GetSystemMetrics(1)+100
+screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+
+eel.init("web")
+
 
 @eel.expose
 def getTitle(name):
@@ -22,8 +26,21 @@ def getTitle(name):
         info.append([name,description,status,poster,type_])
     return info
     
+@eel.expose
+def getYouTube(limit=6,offset=0):
+    api = f"https://api.anilibria.tv/v2/getYouTube?limit={limit}&filter=image,youtube_id,title"
+    data = requests.get(api).json()
+
+    videos = []
+    for i in range(len(data)):
+        title = data[i]['title']
+        image = data[i]['image']
+        link = data[i]["youtube_id"]
+        videos.append([image,link,title])
+    return videos[offset:]
 
 
-eel.init("web")
-eel.start("index.html",cmdline_args=['--start-fullscreen'])
+
+
+eel.start("main.html",cmdline_args=['--start-fullscreen'])
 

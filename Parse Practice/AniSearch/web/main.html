@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="jquery.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>AniSearch</title>
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main_style.css"/>
+</head>
+<body>
+    <div class="head">
+        <nav>AniSearch</nav>
+
+    <div class="links_container">
+        <ul>
+            <li><a href="searchAni.html">Search for Anime</a></li>
+            <li><a href="#">Search for Manga</a></li>
+            <li><a href="#">Расписание выходов</a></li>
+        </ul>
+    </div>
+    </div>
+    <div class="youtube" id="placehere">
+        
+        
+    </div>
+    <div class="load">
+        <button value="Load More"></button>
+    </div>
+
+    <script>
+        let offset = 0;
+        let limit = 6;
+        window.onload = getVideos();
+        async function getVideos() {
+
+            let data = await eel.getYouTube(limit,offset)();
+
+            container_ = document.querySelector('#placehere');
+
+            for(let i = 0; i<data.length; i++){
+                let image = data[i][0];
+                let video_id = data[i][1];
+
+                let iframe = document.createElement('iframe','https://www.youtube.com/embed/'+video_id);
+                iframe.setAttribute('src', 'https://www.youtube.com/embed/'+video_id);
+                iframe.setAttribute('width','400');
+                iframe.setAttribute('height','200');
+                iframe.setAttribute('allow',"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+                iframe.setAttribute('allowfullscreen','')
+
+
+                container_.append(iframe)
+            }
+
+            
+
+            
+        };
+
+    </script>
+</body>
+</html>
+
+

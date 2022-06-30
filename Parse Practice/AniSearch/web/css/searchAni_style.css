@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url(assets/background.jpg);
+    background-image: url('assets/background.jpg');
     background-size:cover;
     margin: 0;
     padding: 0;
@@ -143,7 +143,6 @@ body {
     font-size: 25px;
     font-family: 'Roboto', sans-serif;
     z-index: -5;
-    /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
 }
 
 .info_box .info_str {
@@ -161,4 +160,12 @@ body {
     color: #eee;
     display: contents;
     text-align: center;
+}
+
+.nav i {
+    position: absolute;
+    font-size: 35px;
+    color: #eee;
+    margin-left: 5px;
+    cursor: pointer;
 }
